@@ -36,30 +36,57 @@ class Player extends Character {
   takeItem(itemName) {
 
     // Fill this in
+    let targetItem = this.currentRoom.getItemByName(itemName);
+    let i = this.currentRoom.items.indexOf(targetItem);
 
+    if (i > -1) {
+        this.currentRoom.items.splice(i, 1);
+        this.items.push(targetItem);
+    }
   }
 
   dropItem(itemName) {
 
     // Fill this in
+    let targetItem = this.getItemByName(itemName);
+    if (targetItem !== undefined) {
+        this.removeFromInventory(targetItem);
+        this.currentRoom.items.push(targetItem);
+    }
+  }
 
+  removeFromInventory(item) {
+    let i = this.items.indexOf(item);
+    this.items.splice(i, 1);
   }
 
   eatItem(itemName) {
-
     // Fill this in
+    const { Food } = require('./food');
 
+    let targetItem = this.getItemByName(itemName);
+    if (targetItem instanceof Food) {
+        this.removeFromInventory(targetItem);
+    }
   }
 
   getItemByName(name) {
 
     // Fill this in
-
+    return this.items.find(el => el.name === name.toLowerCase());
   }
 
   hit(name) {
 
     // Fill this in
+    let enemy = this.currentRoom.getEnemyByName(name);
+
+    if (enemy) {
+      enemy.applyDamage(this.strength);
+      enemy.attackTarget = this;
+
+      console.log(`You hit ${enemy.name} for ${this.strength} damage.`)
+    } else console.log(`${name} is not a valid target`);
 
   }
 

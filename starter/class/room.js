@@ -54,13 +54,15 @@ class Room {
   getItemByName(name) {
 
     // Fill this in
-
+    return this.items.find(el => el.name === name.toLowerCase());
   }
 
   getEnemyByName(name) {
 
     // Fill this in
-
+    // console.log(this.getEnemies());
+    return this.getEnemies().find(el => el.name === name.toLowerCase());
+  }
 }
 
 module.exports = {

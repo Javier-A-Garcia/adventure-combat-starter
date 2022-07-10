@@ -21,6 +21,7 @@ function printHelp() {
   console.log("  Type 'take <item>' to take an item");
   console.log("  Type 'drop <item>' to drop an item");
   console.log("  Type 'eat <item>' to eat a food item");
+  console.log("  Type 'hit <target> to attack target");
   console.log("  Type 'n', 's', 'e', 'w' to move");
   console.log("");
 }
@@ -37,6 +38,7 @@ function startGame() {
     World.loadWorld(worldData, player);
     player = new Player(name, World.rooms[1]);
     World.setPlayer(player);
+    World.startGame();
 
     // Show commands
     printHelp();
