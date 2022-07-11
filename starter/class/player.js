@@ -33,6 +33,29 @@ class Player extends Character {
     }
   }
 
+  hit(name) {
+
+    // Fill this in
+    let enemy = this.currentRoom.getEnemyByName(name);
+
+    if (enemy) {
+      enemy.applyDamage(this.strength);
+      enemy.attackTarget = this;
+
+      console.log(`You hit ${enemy.name} for ${this.strength} damage.`)
+    } else console.log(`${name} is not a valid target`);
+
+  }
+
+  die() {
+    console.log("You are dead!");
+    process.exit();
+  }
+
+  /*
+
+ // Moved to Character class to be inherited by enemy
+
   takeItem(itemName) {
 
     // Fill this in
@@ -75,27 +98,10 @@ class Player extends Character {
     // Fill this in
     return this.items.find(el => el.name === name.toLowerCase());
   }
-
-  hit(name) {
-
-    // Fill this in
-    let enemy = this.currentRoom.getEnemyByName(name);
-
-    if (enemy) {
-      enemy.applyDamage(this.strength);
-      enemy.attackTarget = this;
-
-      console.log(`You hit ${enemy.name} for ${this.strength} damage.`)
-    } else console.log(`${name} is not a valid target`);
-
-  }
-
-  die() {
-    console.log("You are dead!");
-    process.exit();
-  }
+  */
 
 }
+
 
 module.exports = {
   Player,

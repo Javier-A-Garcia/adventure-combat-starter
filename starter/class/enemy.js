@@ -1,4 +1,5 @@
-const {Character} = require('./character');
+const { Character } = require('./character');
+const { Food } = require('./food');
 
 
 class Enemy extends Character {
@@ -20,9 +21,11 @@ class Enemy extends Character {
     let exits = this.currentRoom.getExits();
     let rand = Math.floor(Math.random() * exits.length);
     let nextRoom = this.currentRoom.getRoomInDirection(exits[rand]);
-    this.alert(`${this.name} has left the room`);
+    let prevRoom = this.currentRoom.name;
+
+    this.alert(`${this.name} left the room and went ${exits[rand]}`);
     this.currentRoom = nextRoom;
-    this.alert(`${this.name} has entered the room`);
+    this.alert(`${this.name} has entered the room from ${prevRoom}`);
     this.cooldown += 10000;
   }
 
@@ -66,8 +69,20 @@ class Enemy extends Character {
     } else if (this.cooldown > 0) {
       this.rest();
     } else if (this.attackTarget === this.player){
-      this.attack();
+      if (this.health < 25 && this.items.length > 0) {
+        this.eatItem(this.items[0].name);
+        this.rest();
+      } else {
+        this.attack();
+      }
     } else {
+      if (this.currentRoom.items.length > 0) {
+        this.currentRoom.items.forEach(el => {
+          if (el instanceof Food) {
+            this.takeItem(el.name);
+          }
+        });
+      }
       this.randomMove();
       // this.scratchNose();
       this.rest();
