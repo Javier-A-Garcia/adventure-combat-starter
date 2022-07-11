@@ -9,8 +9,8 @@ module.exports = {
     {
       id: 2,
       name: "Northern point",
-      description: "You are standing at the north point of a crossroad. To the south, you see an empty intersection.",
-      exits: {s: 1}
+      description: "You are standing at the north point of a crossroad. To the south, you see an empty intersection. To the north, you see a small room.",
+      exits: {n: 6, s: 1}
     },
     {
       id: 3,
@@ -29,6 +29,13 @@ module.exports = {
       name: "Southern point",
       description: "You are standing at the south point of a crossroad. To the north, you see an empty intersection.",
       exits: {n: 1}
+    },
+    {
+      id: 6,
+      name: "Northern end",
+      description: "You are standing in the northern most room. To the south, you see the Northern point.",
+      exits: {s: 2},
+      isDark: true
     }
   ],
   items: [
@@ -48,6 +55,12 @@ module.exports = {
       description: "An axe of great battle... ness",
       room: 5,
       modifier: 10
+    },
+    {
+      name: "torch",
+      description: "A lit torch that seemingly doesn't go out...",
+      room: 3,
+      light: true
     }
   ],
   enemies: [

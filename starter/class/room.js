@@ -1,3 +1,4 @@
+
 class Room {
 
   constructor(name, description) {
@@ -12,11 +13,15 @@ class Room {
     return World.getEnemiesInRoom(this);
   }
 
-  printRoom() {
+  printRoom(player) {
+    const { DarkRoom } = require('./darkroom');
     console.clear();
     console.log("");
     console.log(this.name);
     console.log("");
+    if (this instanceof DarkRoom && !player.hasLight) {
+      console.log("You cannot see anything");
+    } else {
     console.log(this.description);
     console.log("");
     if (this.getEnemies().length > 0) {
@@ -26,6 +31,7 @@ class Room {
       console.log(`Items: ${this.items.map(item => item.name).join(", ")}`);
     }
     console.log(this.getExitsString());
+  }
     console.log("");
   }
 

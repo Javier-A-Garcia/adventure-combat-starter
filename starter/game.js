@@ -67,7 +67,7 @@ function processCommand() {
       process.exit();
 
     } else if (cmd === 'l') {
-      player.currentRoom.printRoom();
+      player.currentRoom.printRoom(player);
 
     } else if (cmd === 'i') {
       player.printInventory();

@@ -1,3 +1,5 @@
+const { Light } = require('./light');
+
 class Character {
 
   constructor(name, description, currentRoom) {
@@ -18,6 +20,9 @@ class Character {
     if (targetItem !== undefined) {
         this.removeFromInventory(targetItem);
         this.currentRoom.items.push(targetItem);
+        if (targetItem instanceof Light) {
+          this.hasLight = false;
+        }
     }
   }
 
@@ -54,7 +59,11 @@ class Character {
         if (targetItem.modifier) {
           this.strength += targetItem.modifier;
         }
+        if (targetItem instanceof Light) {
+          this.hasLight = true;
+        }
     }
+
   }
 
   applyDamage(amount) {
